@@ -17,10 +17,12 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "amravazzi/study-kubernetes:v5.1"
-          # envFrom:
+          image: "amravazzi/study-kubernetes:v5.2"
+          envFrom:
             # - configMapRef:
             #     name: goserver-env
+            - secretRef:
+                name: goserver-secret
           volumeMounts:
             - name: config
               mountPath: "/go/myfamily"
