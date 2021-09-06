@@ -17,7 +17,34 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "amravazzi/study-kubernetes:v5.2"
+          image: "amravazzi/study-kubernetes:v5.7"
+          ports:
+          - name: liveness-port
+            containerPort: 8000
+
+          startupProbe:
+            httpGet:
+              path: /healthz # endpoint
+              port: liveness-port # container port
+            periodSeconds: 3 # seconds per request
+            failureThreshold: 10 # failure limit threshold
+
+          readinessProbe:
+            httpGet:
+              path: /healthz # endpoint
+              port: liveness-port # container port
+            periodSeconds: 3 # seconds per request
+            failureThreshold: 1 # failure limit threshold
+
+          livenessProbe:
+            httpGet:
+              path: /healthz # endpoint
+              port: liveness-port # container port
+            periodSeconds: 5 # seconds per request
+            failureThreshold: 1 # failure limit threshold
+            timeoutSeconds: 1
+            successThreshold: 1 # how many 200 to say the pod is ok
+
           envFrom:
             # - configMapRef:
             #     name: goserver-env

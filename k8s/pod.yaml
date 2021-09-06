@@ -8,3 +8,6 @@ spec:
   containers:
     - name: goserver
       image: "amravazzi/study-kubernetes:latest"
+      # ports:
+      # - name: liveness-port
+      #   containerPort: 8000
