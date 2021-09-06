@@ -17,7 +17,16 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "amravazzi/study-kubernetes:v5.7"
+          image: "amravazzi/study-kubernetes:v5.8"
+
+          resources:
+            requests: # minimum app specs which is reserved by k8s
+              cpu: "0.05"
+              memory: 20Mi
+            limits:
+              cpu: "0.05"
+              memory: 25Mi
+
           ports:
           - name: liveness-port
             containerPort: 8000
